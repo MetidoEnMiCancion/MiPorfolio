@@ -1,0 +1,169 @@
+---
+import Badge from '../components/Badge.astro';
+import GithubIcon from '../components/Iconos/Github.astro';
+import LinkedInIcon from '../components/Iconos/LinkedIn.astro';
+import MailIcon from '../components/Iconos/Mail.astro';
+import SectionConteiner from '../components/SectionConteiner.astro';
+import SocialPill from '../components/SocialPill.astro';
+import Layout from '../layouts/Layout.astro';
+import CodeIcon from '../components/Iconos/Code.astro';
+import Projects from '../components/Projects.astro';
+import Contacto from '../components/Contacto.astro';
+import DescargaIcon from '../components/Iconos/Descarga.astro';
+import SobreMi from '../components/SobreMi.astro';
+import "../Styles/global.css";
+
+---
+
+<Layout title="Porfolio De Centeno Fernando - Desarrollador y Programador"
+        description='Contrata a Centeno Fernando para crear tus paginas web '
+>
+  <main id="content" class="px-4">
+    <SectionConteiner id="" class="py-20 pb-26">
+
+      <img 
+      class="rounded-full w-30 h-36 mb-4 md:w-40 md:h-48 lg:w-48 lg:h-56 object-cover border-4 border-yellow-200/70 mx-auto" 
+      src="/Yo.jpeg" alt="Fer Foto">
+      
+      <h1 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-4 ">
+        Hey!!👋 <br>
+        <span class="text-yellow-200/70 text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row">
+          Soy Fernando Centeno
+        </span>
+      
+        <a 
+         href="https://www.linkedin.com/in/fernando-centeno-822964296/"
+         target="_blank"
+         rel="noopener"
+         class="flex justify-center items-center"
+         >
+         <div class="flex justify-center items-center pt-4 pl-2">     
+          <Badge>Disponible para trabajar</Badge>
+         </div>
+        </a>
+      </h1>
+      <section class="text-white text-2xl md:text-4xl lg:text-2xl font-bold pb-6 lg:pb-10">
+      <div id="typed-text" class="whitespace-pre-line leading-snug"></div>
+      </section>
+        <nav class="flex gap-4 flex-wrap">
+          <SocialPill href="https://www.linkedin.com/in/fernando-centeno-822964296/">
+            <LinkedInIcon class="size-4 md:size-6" />
+            LinkedIn
+          </SocialPill>
+
+          <SocialPill href="https://github.com/MetidoEnMiCancion">
+            <GithubIcon class="size-4 md:size-6" />
+            Github
+          </SocialPill>
+
+          <SocialPill href="mailto:fgc_710@hotmail.com">
+            <MailIcon class="size-4 md:size-6" />
+            Fgc_710@hotmail.com
+          </SocialPill>
+          <SocialPill href="/Mi_CV.pdf" target="_blank" rel="noopener noreferrer">
+            <DescargaIcon class="size-4 md:size-6" />
+            Descargar CV  
+          </SocialPill>
+        </nav>
+    </SectionConteiner>
+      <SectionConteiner id="proyectos" class="section-hidden">
+  <h2 class="text-3xl font-semibold py-12 flex gap-x-3 items-center">
+    <CodeIcon class="size-7" />
+    Proyectos
+  </h2>
+  <Projects />
+</SectionConteiner>
+
+      <SectionConteiner id="sobreMi" class="section-hidden">    
+        <SobreMi />         
+        </SectionConteiner>
+      
+
+        <SectionConteiner id="contactos" class="section-hidden">
+          <h2 class="text-3xl font-semibold pt-12 flex gap-x-3 items-center">
+            Contacto
+          </h2>
+          <Contacto />
+          </SectionConteiner>
+
+
+      </main>
+</Layout>
+
+<script>
+  const text = `Aprendiendo dia a dia a ser mejor programador.\nsoy de Buenos Aires, Argentina\nMe apasiona crear soluciones practicas, paginas web modernas y funcionales.\nSi buscas un desarrollador comprometido y apasionado, no dudes en contactarme.`;
+
+  const typedElement = document.getElementById('typed-text') as HTMLElement | null;
+  let i = 0;
+
+  function typeWriter() {
+    if (!typedElement) return;
+    if (i < text.length) {
+      typedElement.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 50); // velocidad de tipeo
+    }
+  }
+
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // Espera a que cargue el DOM y vuelve al inicio de la página
+  window.addEventListener("DOMContentLoaded", () => {
+    window.scrollTo({ top: 0, left: 0 });
+    typeWriter();
+  });
+
+  const fadeUpObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-up');
+          fadeUpObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll('.fade-up-trigger').forEach(el => {
+    fadeUpObserver.observe(el);
+  });
+
+  const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+document.querySelectorAll('.section-hidden').forEach(el => {
+  sectionObserver.observe(el);
+});
+const fadeRightObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-right');
+        fadeRightObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
+
+document.querySelectorAll('.fade-right-trigger').forEach(el => {
+  fadeRightObserver.observe(el);
+});
+</script>
+<style>
+  #typed-text {
+    white-space: pre-line; /* Mantiene los saltos de línea */
+  }
+</style>

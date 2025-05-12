@@ -1,0 +1,78 @@
+---
+import GithubIcon from '../components/Iconos/Github.astro';
+import SocialPill from './SocialPill.astro';
+import AstroIcon from '../components/Iconos/Astro1.astro';
+
+const TAGS = {
+  ASTRO: {
+    name: 'Astro',
+    class: 'bg-astro text-white',
+    icon: AstroIcon
+  }
+};
+
+const PROJECTS = [
+  {
+    title: 'Estetica K-M',
+    description: 'Sitio web profesional para una estética moderna.Diseñado para destacar servicios de maquillaje, peinados y coloración con un enfoque visual elegante, adaptable a cualquier dispositivo y pensado para enamorar a cada visitante desde el primer vistazo.',
+    link: 'https://esteticakm.pages.dev/',
+    github: 'https://github.com/MetidoEnMiCancion/Estetica',
+    image: '/FondoEstetica1.png',
+    tags: [TAGS.ASTRO]
+  }
+];
+---
+
+{PROJECTS.map(({ title, description, link, github, image, tags }) => (
+  <article class="fade-up-trigger flex flex-col md:flex-row gap-6 p-6 rounded-lg shadow-xl border border-white/10 bg-white/5 backdrop-blur-sm">
+  <!-- Imagen a la izquierda -->
+  <div class="flex flex-col items-start">
+    <img
+      class="w-full md:w-96 h-72 object-cover rounded shadow-2xl shadow-white/10 mb-4"
+      src={image}
+      alt={`Captura de pantalla del proyecto ${title}`}
+    />
+
+    <!-- Botones debajo de la imagen -->
+    <div class="flex gap-4">
+      <SocialPill href={link}>
+        <AstroIcon class="size-4 md:size-6" />
+        Ver sitio
+      </SocialPill>
+
+      <SocialPill href={github}>
+        <GithubIcon class="size-4 md:size-6" />
+        Repositorio
+      </SocialPill>
+    </div>
+  </div>
+
+  <!-- Descripción a la derecha -->
+  <div class="flex-1">
+    <h3 class="text-2xl font-semibold text-yellow-200 mb-2">{title}</h3>
+
+    <p class="text-base text-white mb-2">
+      {description}
+    </p>
+
+    <p class="text-sm text-blue-300 italic mb-4">🛠️ Tecnologías utilizadas:</p>
+    <ul class="list-disc list-inside text-sm text-blue-300 italic mb-4 space-y-1">
+      <li>Astro para una arquitectura rápida y moderna.</li>
+      <li>Tailwind CSS para un diseño responsive y elegante.</li>
+      <li>JavaScript para funciones interactivas como menús y modales.</li>
+    </ul>
+
+    <ul class="flex gap-2 flex-wrap">
+      {tags.map((tag) => (
+        <li>
+          <span class={`flex items-center gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}>
+            <tag.icon class="size-4" />
+            {tag.name}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>
+
+))}

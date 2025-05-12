@@ -1,0 +1,68 @@
+<header id="mainHeader" class="fixed top-0 z-50 w-full bg-transparent transition-all duration-300">
+  <div class="mx-auto w-full xl:w-[1120px] flex justify-center items-center py-5 px-4">
+    <nav role="navigation" aria-label="Main Navigation" class="flex flex-row gap-x-10 text-white">
+      <a href="/" class="transition-colors duration-300 hover:text-yellow-300" data-nav>Inicio</a>
+      <a href="#proyectos" class="transition-colors duration-300 hover:text-yellow-300" data-nav>Proyectos</a>
+      <a href="#sobreMi" class="transition-colors duration-300 hover:text-yellow-300" data-nav>Sobre Mi</a>
+      <a href="#contactos" class="transition-colors duration-300 hover:text-yellow-300" data-nav>Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="h-[80px]"></div>
+
+<script>
+  const header = document.getElementById('mainHeader');
+
+  window.addEventListener('scroll', () => {
+    if (!header) return;
+    if (window.scrollY > 10) {
+      header.classList.add('bg-black/90', 'shadow-lg', 'backdrop-blur-lg', 'py-3');
+      header.classList.remove('py-5');
+    } else {
+      header.classList.remove('bg-black/90', 'shadow-lg', 'backdrop-blur-lg', 'py-3');
+      header.classList.add('py-5');
+    }
+  });
+
+  // Highlight active nav link based on scroll position
+  function updateActiveNav() {
+    const links = document.querySelectorAll('header nav a');
+    const fromTop = window.scrollY + 120;
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      
+      // Handle homepage link
+      if (href === '/') {
+        if (window.location.pathname === '/' && fromTop < 100) {
+          link.classList.add('text-yellow-300');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('text-yellow-300');
+          link.removeAttribute('aria-current');
+        }
+        return;
+      }
+      
+      // Handle section links
+      if (href.startsWith('#')) {
+        const section = document.querySelector(href) as HTMLElement;
+        if (section) {
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          if (top <= fromTop && bottom > fromTop) {
+            link.classList.add('text-yellow-300');
+            link.setAttribute('aria-current', 'page');
+          } else {
+            link.classList.remove('text-yellow-300');
+            link.removeAttribute('aria-current');
+          }
+        }
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('DOMContentLoaded', updateActiveNav);
+</script>

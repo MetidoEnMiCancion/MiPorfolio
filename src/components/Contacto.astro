@@ -1,0 +1,48 @@
+---
+import InstagramIcon from "./Iconos/Instagram.astro";
+import WhatsappIcon from "./Iconos/Whatsapp.astro";
+import FacebookIcon from "./Iconos/Facebook.astro";
+import LinkedinIcon from "./Iconos/LinkedIn2.astro";
+
+---
+
+    <section class="text-white py-12 px-6 md:px-20">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-start justify-between gap-10">
+
+    <!-- IZQUIERDA -->
+    <div class="space-y-6">
+    
+      <a href="https://www.instagram.com/ferenpie73" target="_blank" rel="noopener noreferrer">
+      <div class="flex items-center gap-3 hover:scale-110 transition">
+          <InstagramIcon class="text-blue-500 w-20 h-20" />  
+            Fer-EnPie-73
+        </div>
+      </a>
+
+      <a href="https://wa.me/+5491140457072">
+      <div class="flex items-center gap-3 hover:scale-110 transition">
+        <WhatsappIcon class="w-20 h-20 text-blue-500" />
+          114045-7072
+        </div>
+      </a>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="space-y-6">
+      <a href="https://www.facebook.com/FernandoGunsNRoses" target="_blank" rel="noopener noreferrer">
+      <div class="flex items-center gap-3 hover:scale-110 transition">
+        <FacebookIcon class="text-blue-500 w-20 h-20" />
+          Fer Centeno
+        </div>
+      </a>
+
+      <a href="https://www.linkedin.com/in/centenofernando710" target="_blank" rel="noopener noreferrer">
+      <div class="flex items-center gap-3 hover:scale-110 transition pt-1">
+        <LinkedinIcon class="text-blue-500 w-20 h-20" />
+          Linkedin
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
