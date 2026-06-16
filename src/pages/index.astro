@@ -1,5 +1,4 @@
----
-import Badge from '../components/Badge.astro';
+﻿import Badge from '../components/Badge.astro';
 import GithubIcon from '../components/Iconos/Github.astro';
 import LinkedInIcon from '../components/Iconos/LinkedIn.astro';
 import MailIcon from '../components/Iconos/Mail.astro';
@@ -12,8 +11,6 @@ import Contacto from '../components/Contacto.astro';
 import DescargaIcon from '../components/Iconos/Descarga.astro';
 import SobreMi from '../components/SobreMi.astro';
 import "../Styles/global.css";
-
----
 
 <Layout title="Porfolio De Centeno Fernando - Desarrollador y Programador"
         description='Contrata a Centeno Fernando para crear tus paginas web '
@@ -78,6 +75,7 @@ import "../Styles/global.css";
         <SobreMi />         
         </SectionConteiner>
       
+
 
         <SectionConteiner id="contactos" class="section-hidden">
           <h2 class="text-3xl font-semibold pt-12 flex gap-x-3 items-center">
@@ -166,4 +164,3 @@ document.querySelectorAll('.fade-right-trigger').forEach(el => {
   #typed-text {
     white-space: pre-line; /* Mantiene los saltos de línea */
   }
-</style>
